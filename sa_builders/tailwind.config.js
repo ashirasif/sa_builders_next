@@ -15,7 +15,10 @@ module.exports = {
       },
       animation: {
         'back-clr-change': 'bcc 5s linear infinite',
-        'navbar': 'nav 2s ease-out 1 forwards'
+        'navbar': 'nav 2s ease-out 1 forwards',
+        'white-glow' : 'glow-sync 3s ease-in-out infinite',
+        'text-center' : 'text-center 2s ease-in-out 1 forwards',
+        'text-btm' : 'text-btm 2s ease-out 1 forwards 3s'
       },
       keyframes: {
         'bcc': {
@@ -25,6 +28,18 @@ module.exports = {
         'nav': {
           '0%' : {'top': '-100px'},
           '100%' : {'top': '0', 'animation-play-state': 'paused'}
+        },
+        'glow-sync' : {
+          '0% 100%' : {'text-shadow': '0 0 0px #ffffff'},
+          '50%': {'text-shadow': '0 0 50px #ffffff'}
+        },
+        'text-center': {
+          '0%': {'position':'relative', 'top':'-100%'},
+          '100%' : {'position':'relative', 'top':'10%'}
+        },
+        'text-btm': {
+          '0%' : {'postion':'relative', 'bottom': '-100%'},
+          '100%': {'position': 'relative', 'bottom': '-10%'}
         }
       }, 
       fontFamily: {
@@ -38,9 +53,13 @@ module.exports = {
   plugins: [
     plugin(function({addUtilities}) {
       addUtilities({
-        '.text-shadow': {
-          'box-shadow' : '0 0 10px #f7ae3b'
+        '.text-shadow-primary': {
+          'text-shadow' : '0 0 10px #f7ae3b'
         },
+        '.text-shadow-white': {
+          'text-shadow' : '0 0 50px #ffffff'
+        },
+
       })
     })
   ],
