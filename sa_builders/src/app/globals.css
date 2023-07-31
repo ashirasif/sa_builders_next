@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: RobotoSA;
+    src: url('../../public/roboto_mono.ttf');
+}
+
