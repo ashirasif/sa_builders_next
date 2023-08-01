@@ -34,8 +34,8 @@ module.exports = {
           '50%': {'text-shadow': '0 0 50px #ffffff'}
         },
         'text-center': {
-          '0%': {'position':'relative', 'top':'-100%'},
-          '100%' : {'position':'relative', 'top':'10%'}
+          '0%': {'position':'relative', 'left':'-100%'},
+          '100%' : {'position':'relative', 'left':'0%'}
         },
         'text-btm': {
           '0%' : {'postion':'relative', 'bottom': '-100%'},

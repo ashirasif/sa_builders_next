@@ -2,36 +2,47 @@
 'use client'
 
 import { DirectionalLightHelper } from 'three/src/helpers/DirectionalLightHelper.js'
-import { useRef, useEffect} from 'react'
+import { useRef, useState, useEffect} from 'react'
 import { useFrame, useLoader, useThree} from '@react-three/fiber'
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useGLTF} from '@react-three/drei';
-import { useHelper } from '@react-three/drei';
-import { SpotLightHelper } from 'three';
 
+import { SpotLightHelper, Object3D } from 'three';
+import {easing} from 'maath'
 
 const BgAnime = () => {
 
+    const coords = useRef({x: 0, y: 0});
     const lightRef = useRef(null)
     const mesh_ref = useRef(null)
-    
-    useFrame(({clock}) => {
-        const a = Math.sin(clock.getElapsedTime()) * 5
+    const mesh_2_ref = useRef(null)
+    const [dummy] = useState(() => new Object3D())
+
+    // animation
+    useFrame((state, dt) => {
         
-        lightRef.current.position.x = a 
-        // lightRef.current.target = mesh_ref.current
-        // lightRef.current.target.updateMatrixWorld()
+        // point light animation
+        const a = Math.sin(state.clock.getElapsedTime()) * 5
+        lightRef.current.position.x = a
+
+        // pointer animation
+        mesh_2_ref.current.position.x = -0.41
+        mesh_ref.current.geometry.center()
+        mesh_2_ref.current.geometry.center()
+        dummy.lookAt(coords.current.x / 60, 1 , 0.1)
+        easing.dampQ(mesh_ref.current.quaternion, dummy.quaternion, 0.02, dt)
+        easing.dampQ(mesh_2_ref.current.quaternion, dummy.quaternion, 0.02, dt)
         
     })
     
-    // useHelper(lightRef, )
+    
+    // importing models
+    const {nodes} = useGLTF("/hexagon.gltf")
 
-    const {nodes, material} = useGLTF("/hexagon.gltf")
+    // adjusting ortho camera zoom
     const state_can = useThree();
     useEffect(() => {
-        
         let s = state_can.size.width
-
         if (s <= 640) {
             state_can.camera.zoom = 196
         }
@@ -43,20 +54,34 @@ const BgAnime = () => {
         }
     }, [state_can])
     
-
+    
+    // effect to get mouse coords over dom elements
+    useEffect(() => {
+        const handleWindowMouseMove = (event : any) => {
+        coords.current.x = (event.clientX - (window.innerWidth / 2)) / (window.innerWidth / 2) 
+        };
+        window.addEventListener('mousemove', handleWindowMouseMove);
+        return () => {
+        window.removeEventListener(
+            'mousemove',
+            handleWindowMouseMove,
+        );
+        };
+    }, []);
 
 
     return(
         <>
             <mesh
-            
-            
                 rotation-x={Math.PI/-2}
                 scale={0.1}
-                position-x={-13}
-                position-y={2}
+                ref={mesh_2_ref}
+                position-x={0}
+                position-y={0}
                 position-z={2}
                 scale-x={0.2}
+                castShadow
+                receiveShadow
                 geometry={nodes.Plane_2.geometry}
             >
                 <meshStandardMaterial color={'#f7ae3b'} roughness={0.7}/>
@@ -64,8 +89,8 @@ const BgAnime = () => {
             <mesh
                 rotation-x={Math.PI/-2}
                 scale={0.1}
-                position-x={-13}
-                position-y={2}
+                position-x={0}
+                position-y={0}
                 position-z={2}
                 scale-x={0.2}
                 ref={mesh_ref}
@@ -75,7 +100,8 @@ const BgAnime = () => {
             >
                 <meshStandardMaterial color={'#de8800'} roughness={0.7}/>
             </mesh>            
-            <directionalLight position={[0,0,4]} intensity={0.1} ref={lightRef} color={"white"} />            
+            
+            <ambientLight position={[0,0,4]} intensity={0.15} color={"white"} />            
             <pointLight position={[0,0,4]} intensity={2} ref={lightRef} decay={2} color={"white"} />
             
         </>

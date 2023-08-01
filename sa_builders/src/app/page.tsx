@@ -11,7 +11,7 @@ import { OrbitControls } from '@react-three/drei'
 import SaText from '@/comps/dom/front_page/text'
 import SaBottom from '@/comps/dom/front_page/bottom_text'
 import { Suspense, useEffect, useState } from 'react'
-import SaLoading from '@/sa_3d/loading'
+import SaLoading from '@/comps/3d/loading'
 import { div } from 'three/examples/jsm/nodes/Nodes.js'
 
 
@@ -36,26 +36,30 @@ export default function Home() {
   }
  
   const [perm, setPerm] = useState(false)
-  
+  const [E, setE] = useState()
+
   useEffect(() => {
-    console.log(perm)
-  }, [perm])
+    window.addEventListener('scroll', function(e) {
+      setE(e)
+      console.log(e)
+    })
+  }, [E])
 
   return ( 
     <>
     {perm ? <div className='w-full h-full'>
       <div className='w-full h-full relative z-10'>
       
-          <div className='h-[10%]'>
+          <div className='h-[10%] relative z-20'>
             <NavigationBar props={{
               'Projects':'',
               'Architecture' : '',
               'Contact us' : ''
             }} />
           </div>
-
+          
           <div className='flex flex-col justify-evenly h-[90%] items-center w-full'> 
-            <div className='text-center animate-text-center'>
+            <div className='text-center animate-text-center relative top-[10%]'>
               <SaText />
             </div>
             <div className='relative -bottom-[100%] text-center animate-text-btm'>
@@ -65,19 +69,17 @@ export default function Home() {
       </div>
       </div> 
       :
-      <div className='flex flex-col justify-center items-center h-screen'>
-        <img src="/loader_2.png" alt="loader" className="aspect-square animate-spin w-52"/>
-      </div>}
+      <SaLoading />}
       
-
-      <div className='fixed top-0 w-screen h-screen'>
-        <Canvas orthographic camera={{zoom:229, position:[0,0,5]}} >
+      <div className='fixed top-0 w-screen h-screen '>
+        <Canvas orthographic camera={{zoom:229, position:[0,0,5]}} shadows >
           <Suspense fallback={<Perm handleState={handleState} />} >
           
             <BgAnime/>
             
           </Suspense>
           <OrbitControls />
+          
         </Canvas>
       </div>
       
