@@ -10,7 +10,7 @@ import BgAnime from '@/comps/3d/bg_anime_orth'
 import { OrbitControls } from '@react-three/drei'
 import SaText from '@/comps/dom/front_page/text'
 import SaBottom from '@/comps/dom/front_page/bottom_text'
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import SaLoading from '@/comps/3d/loading'
 import { div } from 'three/examples/jsm/nodes/Nodes.js'
 
@@ -35,21 +35,23 @@ export default function Home() {
     setPerm(true)
   }
  
-  const [perm, setPerm] = useState(false)
-  const [E, setE] = useState()
-
+  const [perm, setPerm] = useState()
+  const [E, setE] = useState<number | undefined>()
+  const scrollParent = useRef(null)
   useEffect(() => {
-    window.addEventListener('scroll', function(e) {
-      setE(e)
-      console.log(e)
+    
+    scrollParent.current.addEventListener("scroll", (e) => {
+      setE(scrollParent.current.scrollY)
+      console.log(E)
     })
   }, [E])
 
   return ( 
-    <>
-    {perm ? <div className='w-full h-full'>
-      <div className='w-full h-full relative z-10'>
-      
+    
+    <div className='w-full h-full overflow-auto' ref={scrollParent}>
+
+    {perm ? <> 
+        <div className='w-full h-full relative z-10'>  
           <div className='h-[10%] relative z-20'>
             <NavigationBar props={{
               'Projects':'',
@@ -66,24 +68,30 @@ export default function Home() {
              <SaBottom /> 
             </div>
           </div>
-      </div>
-      </div> 
+          
+          <div className='w-full h-screen'>
+            <p className='text-white'>New page</p> 
+          </div>
+        </div>
+      </>
       :
       <SaLoading />}
       
-      <div className='fixed top-0 w-screen h-screen '>
-        <Canvas orthographic camera={{zoom:229, position:[0,0,5]}} shadows >
+      <div className='fixed top-0 w-screen h-screen bg-black'>
+        <Canvas orthographic camera={{zoom:229, position:[0,0,5]}} shadows color='black'>
+        
+
           <Suspense fallback={<Perm handleState={handleState} />} >
           
             <BgAnime/>
             
           </Suspense>
-          <OrbitControls />
+          
           
         </Canvas>
       </div>
-      
-  </>
+    </div>
+    
 
   )
 }

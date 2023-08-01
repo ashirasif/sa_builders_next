@@ -24,7 +24,7 @@ const BgAnime = () => {
         // point light animation
         const a = Math.sin(state.clock.getElapsedTime()) * 5
         lightRef.current.position.x = a
-
+        
         // pointer animation
         mesh_2_ref.current.position.x = -0.41
         mesh_ref.current.geometry.center()
