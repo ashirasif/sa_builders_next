@@ -2,9 +2,9 @@
 'use client'
 
 import { DirectionalLightHelper } from 'three/src/helpers/DirectionalLightHelper.js'
-import { useRef, useState, useEffect} from 'react'
+import { useRef, useState, useEffect, useContext} from 'react'
 import { useFrame, useLoader, useThree} from '@react-three/fiber'
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+
 import { useGLTF} from '@react-three/drei';
 
 import { SpotLightHelper, Object3D, Camera } from 'three';
@@ -12,22 +12,18 @@ import {easing} from 'maath'
 
 
 
-const BgAnime = () => {
+const BgAnime = ({animation}: {animation:{start:number,end:number,prog:number}}) => {
 
     const coords = useRef({x: 0, y: 0});
     const lightRef = useRef(null)
     const mesh_ref = useRef(null)
     const mesh_2_ref = useRef(null)
     const [dummy] = useState(() => new Object3D())
-
-    const scr = useRef<number>(90)
-
-
-    const scrollHandle =  (e : any) => {
-        scr.current = window.scrollY 
-        
     
-    }
+    
+
+
+
 
     // animation
     useFrame((state, dt) => {
@@ -36,26 +32,37 @@ const BgAnime = () => {
         const a = Math.sin(state.clock.getElapsedTime()) * 5
         lightRef.current.position.x = a
         
+
+        
         // pointer animation
-        mesh_2_ref.current.position.x = -0.41
+        
+        
         mesh_ref.current.geometry.center()
         mesh_2_ref.current.geometry.center()
         dummy.lookAt(coords.current.x / 60, 1 , 0.1)
         easing.dampQ(mesh_ref.current.quaternion, dummy.quaternion, 0.02, dt)
         easing.dampQ(mesh_2_ref.current.quaternion, dummy.quaternion, 0.02, dt)
-        console.log(scr.current, state.size.width)
-        if (scr.current >= window.innerHeight) {
-            easing.damp(state.camera, 'zoom', 300, 0.02, dt)
-            state.camera.updateProjectionMatrix()
+        
+        state.camera.updateProjectionMatrix()
+        
+        
+        // fade out animation
+        if (animation.prog >= animation.end) {
+            console.log("hide")
+            mesh_2_ref.current.visible = false
+            mesh_ref.current.visible = false
+        } else {
+            mesh_2_ref.current.visible = true
+            mesh_ref.current.visible = true
+
         }
-    
     })
     
     
     // importing models
     const {nodes} = useGLTF("/hexagon.gltf")
     
-
+    // adjust orthographi camera's zoom
     const state_can = useThree();
     useEffect(() => {
         let s = state_can.size.width
@@ -86,15 +93,12 @@ const BgAnime = () => {
         };
     }, []);
 
-
-
     useEffect(() => {
+        let z = state_can.camera.zoom
+        console.log("zoom", z)
+        console.log("virtual zoom: ",z * (animation.prog*5*0.03))        
+    }, [animation.prog])
 
-        window.addEventListener('scroll',scrollHandle)
-        return () => {
-        window.removeEventListener('scroll', scrollHandle)
-        }
-    }, [])
 
     return(
         <>
@@ -102,7 +106,7 @@ const BgAnime = () => {
                 rotation-x={Math.PI/-2}
                 scale={0.1}
                 ref={mesh_2_ref}
-                position-x={0}
+                position-x={-0.41}
                 position-y={0}
                 position-z={2}
                 scale-x={0.2}

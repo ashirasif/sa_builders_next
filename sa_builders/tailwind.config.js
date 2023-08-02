@@ -18,7 +18,7 @@ module.exports = {
         'navbar': 'nav 2s ease-out 1 forwards',
         'white-glow' : 'glow-sync 3s ease-in-out infinite',
         'text-center' : 'text-center 2s ease-in-out 1 forwards',
-        'text-btm' : 'text-btm 2s ease-out 1 forwards 3s'
+        'text-btm' : 'text-btm 2s ease-out 1 forwards 1s'
       },
       keyframes: {
         'bcc': {

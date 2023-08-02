@@ -6,13 +6,13 @@
 // comps import
 import NavigationBar from '@/comps/dom/nav_bar/NavBar'
 import { Canvas } from '@react-three/fiber'
-import BgAnime from '@/comps/3d/bg_anime'
+import Scene from '@/comps/3d/scene'
 import { OrbitControls } from '@react-three/drei'
 import SaText from '@/comps/dom/front_page/text'
 import SaBottom from '@/comps/dom/front_page/bottom_text'
 import { Suspense, useEffect, useRef, useState } from 'react'
 import SaLoading from '@/comps/3d/loading'
-
+import { PerspectiveCamera, OrthographicCamera } from '@react-three/drei'
 
 
 
@@ -34,8 +34,36 @@ export default function Home() {
   function handleState() {
     setPerm(true)
   }
+
+  function toggleCam(s: boolean) {
+    setPers(s)
+  }
+  
+  const scrollHandle =  (e : any) => {
+      scr.current = window.scrollY 
+      if (scr.current >= window.innerHeight) {
+        toggleCam(true)
+      } else {
+        toggleCam(false)
+      }
+  }
+
  
   const [perm, setPerm] = useState(false)
+  const [pers, setPers] = useState(false)
+  const scr = useRef(0)
+  
+
+
+
+  useEffect(() => {
+
+      window.addEventListener('scroll',scrollHandle)
+      console.log(window.outerHeight)
+      return () => {
+      window.removeEventListener('scroll', scrollHandle)
+      }
+  }, [])
 
   return ( 
     
@@ -68,16 +96,8 @@ export default function Home() {
       <SaLoading />}
       
       <div className='fixed top-0 w-screen h-screen bg-black'>
-        <Canvas camera={{position:[0,0,5], fov:500}} shadows color='black'>
-        
-
-          <Suspense fallback={<Perm handleState={handleState} />} >
-          
-            <BgAnime/>
-            
-          </Suspense>
-          
-          
+        <Canvas shadows color='black' camera={{position:[0,0,5], zoom:220}} orthographic>
+          <Scene setPerm={setPerm}/>
         </Canvas>
       </div>
     </>
