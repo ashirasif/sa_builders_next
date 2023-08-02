@@ -38,8 +38,8 @@ module.exports = {
           '100%' : {'position':'relative', 'left':'0%'}
         },
         'text-btm': {
-          '0%' : {'postion':'relative', 'bottom': '-100%'},
-          '100%': {'position': 'relative', 'bottom': '-10%'}
+          '0%' : {'postion':'relative', 'bottom': '-100%', 'overflow': 'hidden'},
+          '100%': {'position': 'relative', 'bottom': '0%', 'overflow': 'auto'}
         }
       }, 
       fontFamily: {
@@ -59,8 +59,8 @@ module.exports = {
         '.text-shadow-white': {
           'text-shadow' : '0 0 50px #ffffff'
         },
-
       })
-    })
+    }),
+    require('tailwind-scrollbar')({ nocompatible: true }),
   ],
 }

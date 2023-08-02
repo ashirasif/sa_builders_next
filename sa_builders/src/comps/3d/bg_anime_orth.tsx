@@ -7,8 +7,10 @@ import { useFrame, useLoader, useThree} from '@react-three/fiber'
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useGLTF} from '@react-three/drei';
 
-import { SpotLightHelper, Object3D } from 'three';
+import { SpotLightHelper, Object3D, Camera } from 'three';
 import {easing} from 'maath'
+
+
 
 const BgAnime = () => {
 
@@ -17,6 +19,15 @@ const BgAnime = () => {
     const mesh_ref = useRef(null)
     const mesh_2_ref = useRef(null)
     const [dummy] = useState(() => new Object3D())
+
+    const scr = useRef<number>(90)
+
+
+    const scrollHandle =  (e : any) => {
+        scr.current = window.scrollY 
+        
+    
+    }
 
     // animation
     useFrame((state, dt) => {
@@ -32,14 +43,19 @@ const BgAnime = () => {
         dummy.lookAt(coords.current.x / 60, 1 , 0.1)
         easing.dampQ(mesh_ref.current.quaternion, dummy.quaternion, 0.02, dt)
         easing.dampQ(mesh_2_ref.current.quaternion, dummy.quaternion, 0.02, dt)
-        
+        console.log(scr.current, state.size.width)
+        if (scr.current >= window.innerHeight) {
+            easing.damp(state.camera, 'zoom', 300, 0.02, dt)
+            state.camera.updateProjectionMatrix()
+        }
+    
     })
     
     
     // importing models
     const {nodes} = useGLTF("/hexagon.gltf")
+    
 
-    // adjusting ortho camera zoom
     const state_can = useThree();
     useEffect(() => {
         let s = state_can.size.width
@@ -52,6 +68,7 @@ const BgAnime = () => {
         else {
             state_can.camera.zoom = 229
         }
+        state_can.camera.updateProjectionMatrix()       
     }, [state_can])
     
     
@@ -69,6 +86,15 @@ const BgAnime = () => {
         };
     }, []);
 
+
+
+    useEffect(() => {
+
+        window.addEventListener('scroll',scrollHandle)
+        return () => {
+        window.removeEventListener('scroll', scrollHandle)
+        }
+    }, [])
 
     return(
         <>

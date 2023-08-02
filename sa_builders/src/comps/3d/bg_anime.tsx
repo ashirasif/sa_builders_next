@@ -9,7 +9,7 @@ import { useGLTF} from '@react-three/drei';
 import { useHelper } from '@react-three/drei';
 
 
-const BgAnime = ({num} : {num:number}) => {
+const BgAnime = () => {
 
     const lightRef = useRef(null)
     

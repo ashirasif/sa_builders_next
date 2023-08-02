@@ -16,8 +16,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div className={"bg-black overflow-hidden h-screen font-sa"}>
+      <body className={inter.className + ' scrollbar-thin scrollbar-thumb-primary scrollbar-track-black scrollbar-thumb-rounded-full'}>
+        <div className={"bg-black h-screen font-sa"}>
           {children}
         </div>
         

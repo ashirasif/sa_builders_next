@@ -1,18 +1,18 @@
 'use client'
 
 
-import Image from 'next/image'
+
 
 // comps import
 import NavigationBar from '@/comps/dom/nav_bar/NavBar'
 import { Canvas } from '@react-three/fiber'
-import BgAnime from '@/comps/3d/bg_anime_orth'
+import BgAnime from '@/comps/3d/bg_anime'
 import { OrbitControls } from '@react-three/drei'
 import SaText from '@/comps/dom/front_page/text'
 import SaBottom from '@/comps/dom/front_page/bottom_text'
 import { Suspense, useEffect, useRef, useState } from 'react'
 import SaLoading from '@/comps/3d/loading'
-import { div } from 'three/examples/jsm/nodes/Nodes.js'
+
 
 
 
@@ -35,21 +35,11 @@ export default function Home() {
     setPerm(true)
   }
  
-  const [perm, setPerm] = useState()
-  const [E, setE] = useState<number | undefined>()
-  const scrollParent = useRef(null)
-  useEffect(() => {
-    
-    scrollParent.current.addEventListener("scroll", (e) => {
-      setE(scrollParent.current.scrollY)
-      console.log(E)
-    })
-  }, [E])
+  const [perm, setPerm] = useState(false)
 
   return ( 
     
-    <div className='w-full h-full overflow-auto' ref={scrollParent}>
-
+    <>
     {perm ? <> 
         <div className='w-full h-full relative z-10'>  
           <div className='h-[10%] relative z-20'>
@@ -78,7 +68,7 @@ export default function Home() {
       <SaLoading />}
       
       <div className='fixed top-0 w-screen h-screen bg-black'>
-        <Canvas orthographic camera={{zoom:229, position:[0,0,5]}} shadows color='black'>
+        <Canvas camera={{position:[0,0,5], fov:500}} shadows color='black'>
         
 
           <Suspense fallback={<Perm handleState={handleState} />} >
@@ -90,7 +80,7 @@ export default function Home() {
           
         </Canvas>
       </div>
-    </div>
+    </>
     
 
   )
