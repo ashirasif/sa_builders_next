@@ -1,11 +1,11 @@
 'use client'
 
 
-import { MutableRefObject, Suspense, createContext, useContext, useEffect, useRef, useState } from "react"
+import { Suspense, useEffect, useRef, useState } from "react"
 import BgAnime from "./bg_anime_orth"
+import { PerspectiveCamera, OrthographicCamera } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
-
-
+import Sa3DHouse from "./houses"
 
 
 
@@ -22,8 +22,8 @@ function Perm({handleState} : {handleState: (s: boolean) => void}) {
 const Scene = ({setPerm} : {setPerm: (s: boolean) => void}) => {
 
     // init all refs and states
-    const scr = useRef<number>(0)
-    const totalPages = useRef<number>(0)
+    
+    const [perscam, setPerscam] = useState<boolean>(false)
     const [prog, setProg] = useState<number>(0)
     // handle permission to render dom elements
     function handlePerm() {
@@ -31,12 +31,19 @@ const Scene = ({setPerm} : {setPerm: (s: boolean) => void}) => {
     }
     // scroll progress (%)
     function handleScroll() {
-      
         setProg(Math.floor(window.scrollY/ (document.documentElement.scrollHeight - window.innerHeight) * 100))
-        totalPages.current = Math.floor(document.documentElement.scrollHeight / window.innerHeight)
-        
     }
+    
 
+
+    // toggle camera
+    useEffect(() => {
+      if (prog > 66) {
+        setPerscam(true)
+      } else {
+        setPerscam(false)
+      }
+    }, [prog])
     // window scroll event
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
@@ -50,7 +57,9 @@ const Scene = ({setPerm} : {setPerm: (s: boolean) => void}) => {
     return (
         
         <Suspense fallback={<Perm handleState={handlePerm} />}>
-          <BgAnime animation={{start: 0, end: 50, prog: prog}} />
+          <BgAnime animation={{start: 0, end: 66, prog: prog}} />
+          <Sa3DHouse anime={{start: 66, end: 100, prog: prog}} />
+          {perscam ? <PerspectiveCamera makeDefault position={[0,0,5]} fov={75} near={0.1} far={1000}/> : <OrthographicCamera makeDefault zoom={220} position={[0,0,5]}/>}
         </Suspense>
         
     )

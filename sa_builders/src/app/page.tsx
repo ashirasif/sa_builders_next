@@ -14,7 +14,7 @@ import { Suspense, useEffect, useRef, useState } from 'react'
 import SaLoading from '@/comps/3d/loading'
 import { PerspectiveCamera, OrthographicCamera } from '@react-three/drei'
 import SaIntro from '@/comps/dom/sa_intro'
-
+import SaHouse from '@/comps/dom/sa_house'
 
 
 
@@ -31,7 +31,7 @@ export default function Home() {
     
     <>
     {perm ? <> 
-        <div className='w-full h-full relative z-10'>  
+        <div className='w-full h-full relative'>  
           <div className='h-[10%] relative z-20'>
             <NavigationBar props={{
               'Projects':'',
@@ -49,14 +49,17 @@ export default function Home() {
             </div>
           </div> 
           <SaIntro />
+          <SaHouse />
         </div>
       </>
       :
       <SaLoading />}
       
       <div className='fixed top-0 w-screen h-screen bg-black'>
-        <Canvas shadows color='black' camera={{position:[0,0,5], zoom:220}} orthographic>
+        <Canvas shadows color='black'>
           <Scene setPerm={setPerm}/>
+          <OrbitControls />
+          <gridHelper />
         </Canvas>
       </div>
     </>

@@ -42,8 +42,8 @@ const BgAnime = ({animation}: {animation:{start:number,end:number,prog:number}})
         dummy.lookAt(coords.current.x / 60, 1 , 0.1)
         easing.dampQ(mesh_ref.current.quaternion, dummy.quaternion, 0.02, dt)
         easing.dampQ(mesh_2_ref.current.quaternion, dummy.quaternion, 0.02, dt)
-
-        if (animation.end >= animation.prog) {
+        
+        if (animation.end / 2 >= animation.prog) {
             if (state.camera.zoom != 200) {
                 easing.damp(state_can.camera, 'zoom', handleZoom(), 0.06, dt)
                 state_can.camera.updateProjectionMatrix()
@@ -59,11 +59,19 @@ const BgAnime = ({animation}: {animation:{start:number,end:number,prog:number}})
 
             // }
 
-        } else {
+        } if (animation.end / 2 < animation.prog) {
             if (state.camera.zoom != 400) {
                 easing.damp(state_can.camera, 'zoom', 400, 0.09, dt)
                 state_can.camera.updateProjectionMatrix()
             }
+        } if (animation.end < animation.prog) {
+            
+            mesh_2_ref.current.visible = false
+            mesh_ref.current.visible = false
+        } else {
+            mesh_2_ref.current.visible = true
+            mesh_ref.current.visible = true
+
         }
     })
     
