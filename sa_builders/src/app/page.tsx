@@ -31,7 +31,7 @@ export default function Home() {
     
     <>
     {perm ? <> 
-        <div className='w-full h-full relative'>  
+        <div className='w-full h-full relative z-10'>  
           <div className='h-[10%] relative z-20'>
             <NavigationBar props={{
               'Projects':'',

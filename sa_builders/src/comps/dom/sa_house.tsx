@@ -10,7 +10,7 @@ const SaHouse = () => {
 
 
     const [ref, inView] = useInView({
-        amount: [0.01],
+        amount: [0.001],
         
     })
 
@@ -25,7 +25,7 @@ const SaHouse = () => {
 
 
     return(
-        <div className="h-screen text-white group overflow-hidden border-primary border-l-4">
+        <div className="h-screen text-white group overflow-hidden">
             <animated.div ref={ref} className="text-white text-3xl" >
                 <h1 className={"transition-all duration-500" + (inView ? " my-10" : "")}>Now For Some Real Introduction!</h1>
                 <h1 className={"transition-all duration-500" + (inView ? " my-10" : "")}>Behold</h1>

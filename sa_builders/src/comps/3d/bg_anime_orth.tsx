@@ -28,65 +28,43 @@ const BgAnime = ({animation}: {animation:{start:number,end:number,prog:number}})
     // animation
     useFrame((state, dt) => {
     
-        // point light animation
-        const a = Math.sin(state.clock.getElapsedTime()) * 5
-        lightRef.current.position.x = a
+        if (animation.end >= animation.prog) {    
+
+            // point light animation
+            const a = Math.sin(state.clock.getElapsedTime()) * 5
+            lightRef.current.position.x = a
         
 
         
-        // pointer animation
+            // pointer animation
+            mesh_ref.current.geometry.center()
+            mesh_2_ref.current.geometry.center()
+            dummy.lookAt(coords.current.x / 60, 1 , 0.1)
+            easing.dampQ(mesh_ref.current.quaternion, dummy.quaternion, 0.02, dt)
+            easing.dampQ(mesh_2_ref.current.quaternion, dummy.quaternion, 0.02, dt)
         
-        
-        mesh_ref.current.geometry.center()
-        mesh_2_ref.current.geometry.center()
-        dummy.lookAt(coords.current.x / 60, 1 , 0.1)
-        easing.dampQ(mesh_ref.current.quaternion, dummy.quaternion, 0.02, dt)
-        easing.dampQ(mesh_2_ref.current.quaternion, dummy.quaternion, 0.02, dt)
-        
-        if (animation.end / 2 >= animation.prog) {
-            if (state.camera.zoom != 200) {
-                easing.damp(state_can.camera, 'zoom', handleZoom(), 0.06, dt)
-                state_can.camera.updateProjectionMatrix()
+            if (animation.end / 2 >= animation.prog) {
+                if (state.camera.zoom != 200) {
+                    easing.damp(state_can.camera, 'zoom', handleZoom(), 0.06, dt)
+                    state_can.camera.updateProjectionMatrix()
+                }
+
+            } if (animation.end / 2 < animation.prog) {
+                if (state.camera.zoom != 400) {
+                    easing.damp(state_can.camera, 'zoom', 400, 0.09, dt)
+                    state_can.camera.updateProjectionMatrix()
+                }
             }
-            // fade out animation
-            // if (animation.prog >= animation.end) {
-            //     console.log("hide")
-            //     mesh_2_ref.current.visible = false
-            //     mesh_ref.current.visible = false
-            // } else {
-            //     mesh_2_ref.current.visible = true
-            //     mesh_ref.current.visible = true
 
-            // }
-
-        } if (animation.end / 2 < animation.prog) {
-            if (state.camera.zoom != 400) {
-                easing.damp(state_can.camera, 'zoom', 400, 0.09, dt)
-                state_can.camera.updateProjectionMatrix()
-            }
-        } if (animation.end < animation.prog) {
-            
-            mesh_2_ref.current.visible = false
-            mesh_ref.current.visible = false
-        } else {
             mesh_2_ref.current.visible = true
             mesh_ref.current.visible = true
 
+        } else {
+            mesh_2_ref.current.visible = false
+            mesh_ref.current.visible = false
         }
     })
     
-    // useeffect zoom 
-    // useEffect(() => {
-    //   console.log(animation.end, animation.prog)
-    //   if (animation.end < animation.prog) {
-        
-        
-    //   } else {
-    //     console.log('happened')
-    //     easing.damp(state_can.camera, 'zoom', handleZoom(), 0.02)
-    //     state_can.camera.updateProjectionMatrix()
-    //   }
-    // }, [animation.prog])
     
     
     // importing models
