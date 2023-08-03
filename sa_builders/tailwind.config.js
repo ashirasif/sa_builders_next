@@ -18,7 +18,12 @@ module.exports = {
         'navbar': 'nav 2s ease-out 1 forwards',
         'white-glow' : 'glow-sync 3s ease-in-out infinite',
         'text-center' : 'text-center 2s ease-in-out 1 forwards',
-        'text-btm' : 'text-btm 2s ease-out 1 forwards 1s'
+        'text-btm' : 'text-btm 2s ease-out 1 forwards 1s',
+        'go-left' : 'go-left 500ms ease-in forwards 1',
+        'go-right' : 'go-right 500ms ease-in-out forwards 1',
+        'back-right' : 'back-right 500ms ease-in-out forwards 1',
+        'back-left' : 'back-left 500ms ease-in-out forwards 1',
+
       },
       keyframes: {
         'bcc': {
@@ -38,8 +43,24 @@ module.exports = {
           '100%' : {'position':'relative', 'left':'0%'}
         },
         'text-btm': {
-          '0%' : {'postion':'relative', 'bottom': '-100%', 'overflow': 'hidden'},
+          '0%' : {'postion':'relative', 'bottom': '-10', 'overflow': 'hidden'},
           '100%': {'position': 'relative', 'bottom': '0%', 'overflow': 'auto'}
+        },
+        'go-left': {
+          '0%': {'left': '0'},
+          '100%': {'left': '-100%'}
+        },
+        'go-right' : {
+          '0%': {'left': '0'},
+          '100%': {'right': '-100%'}
+        },
+        'back-left': {
+          '0%': {'left': '-100%'},
+          '100%': {'left': '0'}
+        },
+        'back-right': {
+          '0%': {'right': '-100%'},
+          '100%': {'left': '0'}
         }
       }, 
       fontFamily: {

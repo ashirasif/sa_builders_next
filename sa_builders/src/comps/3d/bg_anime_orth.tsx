@@ -27,7 +27,7 @@ const BgAnime = ({animation}: {animation:{start:number,end:number,prog:number}})
 
     // animation
     useFrame((state, dt) => {
-        
+    
         // point light animation
         const a = Math.sin(state.clock.getElapsedTime()) * 5
         lightRef.current.position.x = a
@@ -42,21 +42,43 @@ const BgAnime = ({animation}: {animation:{start:number,end:number,prog:number}})
         dummy.lookAt(coords.current.x / 60, 1 , 0.1)
         easing.dampQ(mesh_ref.current.quaternion, dummy.quaternion, 0.02, dt)
         easing.dampQ(mesh_2_ref.current.quaternion, dummy.quaternion, 0.02, dt)
-        
-        state.camera.updateProjectionMatrix()
-        
-        
-        // fade out animation
-        if (animation.prog >= animation.end) {
-            console.log("hide")
-            mesh_2_ref.current.visible = false
-            mesh_ref.current.visible = false
-        } else {
-            mesh_2_ref.current.visible = true
-            mesh_ref.current.visible = true
 
+        if (animation.end >= animation.prog) {
+            if (state.camera.zoom != 200) {
+                easing.damp(state_can.camera, 'zoom', handleZoom(), 0.06, dt)
+                state_can.camera.updateProjectionMatrix()
+            }
+            // fade out animation
+            // if (animation.prog >= animation.end) {
+            //     console.log("hide")
+            //     mesh_2_ref.current.visible = false
+            //     mesh_ref.current.visible = false
+            // } else {
+            //     mesh_2_ref.current.visible = true
+            //     mesh_ref.current.visible = true
+
+            // }
+
+        } else {
+            if (state.camera.zoom != 400) {
+                easing.damp(state_can.camera, 'zoom', 400, 0.09, dt)
+                state_can.camera.updateProjectionMatrix()
+            }
         }
     })
+    
+    // useeffect zoom 
+    // useEffect(() => {
+    //   console.log(animation.end, animation.prog)
+    //   if (animation.end < animation.prog) {
+        
+        
+    //   } else {
+    //     console.log('happened')
+    //     easing.damp(state_can.camera, 'zoom', handleZoom(), 0.02)
+    //     state_can.camera.updateProjectionMatrix()
+    //   }
+    // }, [animation.prog])
     
     
     // importing models
@@ -65,18 +87,9 @@ const BgAnime = ({animation}: {animation:{start:number,end:number,prog:number}})
     // adjust orthographi camera's zoom
     const state_can = useThree();
     useEffect(() => {
-        let s = state_can.size.width
-        if (s <= 640) {
-            state_can.camera.zoom = 196
-        }
-        else if (s <= 768) {
-            state_can.camera.zoom = 206 
-        }
-        else {
-            state_can.camera.zoom = 229
-        }
-        state_can.camera.updateProjectionMatrix()       
-    }, [state_can])
+        state_can.camera.zoom = handleZoom()
+        state_can.camera.updateProjectionMatrix()
+    }, [state_can.size.width])
     
     
     // effect to get mouse coords over dom elements
@@ -93,11 +106,22 @@ const BgAnime = ({animation}: {animation:{start:number,end:number,prog:number}})
         };
     }, []);
 
-    useEffect(() => {
-        let z = state_can.camera.zoom
-        console.log("zoom", z)
-        console.log("virtual zoom: ",z * (animation.prog*5*0.03))        
-    }, [animation.prog])
+
+    function handleZoom() {
+        let s = state_can.size.width
+        let z = 0
+        if (s <= 640) {
+            z = 196
+        }
+        else if (s <= 768) {
+            z = 206 
+        }
+        else {
+            z = 229
+        }
+        
+        return(z)
+    }
 
 
     return(

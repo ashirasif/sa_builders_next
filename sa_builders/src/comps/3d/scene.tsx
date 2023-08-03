@@ -31,6 +31,7 @@ const Scene = ({setPerm} : {setPerm: (s: boolean) => void}) => {
     }
     // scroll progress (%)
     function handleScroll() {
+      
         setProg(Math.floor(window.scrollY/ (document.documentElement.scrollHeight - window.innerHeight) * 100))
         totalPages.current = Math.floor(document.documentElement.scrollHeight / window.innerHeight)
         
@@ -46,16 +47,10 @@ const Scene = ({setPerm} : {setPerm: (s: boolean) => void}) => {
     }, [])
 
 
-    
-
-
     return (
         
         <Suspense fallback={<Perm handleState={handlePerm} />}>
-        
-                <BgAnime animation={{start: 0, end: 20, prog: prog}} />
-                
-            
+          <BgAnime animation={{start: 0, end: 50, prog: prog}} />
         </Suspense>
         
     )

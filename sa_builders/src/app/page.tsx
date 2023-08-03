@@ -13,19 +13,8 @@ import SaBottom from '@/comps/dom/front_page/bottom_text'
 import { Suspense, useEffect, useRef, useState } from 'react'
 import SaLoading from '@/comps/3d/loading'
 import { PerspectiveCamera, OrthographicCamera } from '@react-three/drei'
+import SaIntro from '@/comps/dom/sa_intro'
 
-
-
-
-function Perm({handleState} : any) {
-  useEffect(() => {
-    return(() => {
-      handleState(true)
-    })
-  }, []) 
-
-  return(<></>)
-}
 
 
 
@@ -35,35 +24,8 @@ export default function Home() {
     setPerm(true)
   }
 
-  function toggleCam(s: boolean) {
-    setPers(s)
-  }
-  
-  const scrollHandle =  (e : any) => {
-      scr.current = window.scrollY 
-      if (scr.current >= window.innerHeight) {
-        toggleCam(true)
-      } else {
-        toggleCam(false)
-      }
-  }
-
- 
   const [perm, setPerm] = useState(false)
-  const [pers, setPers] = useState(false)
   const scr = useRef(0)
-  
-
-
-
-  useEffect(() => {
-
-      window.addEventListener('scroll',scrollHandle)
-      console.log(window.outerHeight)
-      return () => {
-      window.removeEventListener('scroll', scrollHandle)
-      }
-  }, [])
 
   return ( 
     
@@ -85,11 +47,8 @@ export default function Home() {
             <div className='relative -bottom-[100%] text-center animate-text-btm'>
              <SaBottom /> 
             </div>
-          </div>
-          
-          <div className='w-full h-screen'>
-            <p className='text-white'>New page</p> 
-          </div>
+          </div> 
+          <SaIntro />
         </div>
       </>
       :
