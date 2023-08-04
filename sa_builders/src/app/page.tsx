@@ -56,7 +56,7 @@ export default function Home() {
       <SaLoading />}
       
       <div className='fixed top-0 w-screen h-screen bg-black'>
-        <Canvas shadows color='black'>
+        <Canvas shadows color='black' linear >
           <Scene setPerm={setPerm}/>
           <OrbitControls />
           <gridHelper />

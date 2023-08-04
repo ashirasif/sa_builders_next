@@ -124,7 +124,7 @@ const BgAnime = ({animation}: {animation:{start:number,end:number,prog:number}})
                 receiveShadow
                 geometry={nodes.Plane_2.geometry}
             >
-                <meshStandardMaterial color={'#f7ae3b'} roughness={0.7}/>
+                <meshStandardMaterial color={'#e08938'} roughness={0.7}/>
             </mesh>            
             <mesh
                 rotation-x={Math.PI/-2}
@@ -138,11 +138,11 @@ const BgAnime = ({animation}: {animation:{start:number,end:number,prog:number}})
                 receiveShadow
                 geometry={nodes.Plane_1.geometry}
             >
-                <meshStandardMaterial color={'#de8800'} roughness={0.7}/>
+                <meshStandardMaterial color={'#f7ae3b'} roughness={0.7}/>
             </mesh>            
             
-            <ambientLight position={[0,0,4]} intensity={0.15} color={"white"} />            
-            <pointLight position={[0,0,4]} intensity={2} ref={lightRef} decay={2} color={"white"} />
+            <ambientLight position={[0,0,4]} intensity={0.5} color={"white"} />            
+            <pointLight position={[0,0,4]} intensity={5} ref={lightRef} decay={2} color={"white"} />
             
         </>
     )
