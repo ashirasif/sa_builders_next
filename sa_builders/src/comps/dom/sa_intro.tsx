@@ -19,6 +19,7 @@ const SaIntro = () => {
                     <li><a onClick={() => setShowDet(false)}className="hover:text-white hover:after:content-['_\27F6'] after:text-white transition-all duration-200">Luxury Offices</a></li>
                     <li><a onClick={() => setShowDet(false)}className="hover:text-white hover:after:content-['_\27F6'] after:text-white transition-all duration-200">Shopping Centers</a></li>
                 </ul>
+                <button className='text-lg text-primary bg-transparent border-transparent hover:border-primary hover:border-2 rounded hover:px-3 hover:py-2 mt-8 transition-all'>Check out our past projects</button>
             </div>
             <div className={'h-screen relative left-[100vw] -top-[100vh] p-8 transition-all duration-1000 lg:static' + (showDet?' animate-go-right lg:animate-none lg:hidden':' lg:basis-1/2 animate-back-right lg:animate-none lg:block')}>
                 <div className='flex flex-col justify-center items-center h-full'>

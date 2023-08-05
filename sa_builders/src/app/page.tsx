@@ -15,6 +15,8 @@ import SaLoading from '@/comps/3d/loading'
 import { PerspectiveCamera, OrthographicCamera } from '@react-three/drei'
 import SaIntro from '@/comps/dom/sa_intro'
 import SaHouse from '@/comps/dom/sa_house'
+import Page from '@/comps/dom/emppage'
+import WhyChooseUS from '@/comps/dom/why_chose_us'
 
 
 
@@ -50,16 +52,29 @@ export default function Home() {
           </div> 
           <SaIntro />
           <SaHouse />
+          <Page />
+          <Page />
+          <Page />
+          <Page />
+          <Page />
+          <Page />
+          <WhyChooseUS />
+          <Page />
+          <Page />
+          <Page />
         </div>
       </>
       :
       <SaLoading />}
       
       <div className='fixed top-0 w-screen h-screen bg-black'>
-        <Canvas shadows color='black' linear >
+        <Canvas 
+          shadows 
+          color='black' 
+          linear>
           <Scene setPerm={setPerm}/>
           <OrbitControls />
-          <gridHelper />
+          
         </Canvas>
       </div>
     </>

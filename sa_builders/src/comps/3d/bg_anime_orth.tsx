@@ -60,6 +60,7 @@ const BgAnime = ({animation}: {animation:{start:number,end:number,prog:number}})
             mesh_ref.current.visible = true
 
         } else {
+            
             mesh_2_ref.current.visible = false
             mesh_ref.current.visible = false
         }
