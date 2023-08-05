@@ -14,9 +14,7 @@ const SaHouse = () => {
         
     })
 
-    useEffect(() => {
-        console.log(inView)
-    }, [inView])
+
 
 
     return(

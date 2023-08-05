@@ -4,7 +4,7 @@
 const Page = () => {
     
     return(
-        <div className="h-screen overflow-hidden">
+        <div className="h-screen overflow-hidden border-primary border-b-4">
         </div>       
     )
 }

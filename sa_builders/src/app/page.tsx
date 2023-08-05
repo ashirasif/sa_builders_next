@@ -17,6 +17,8 @@ import SaIntro from '@/comps/dom/sa_intro'
 import SaHouse from '@/comps/dom/sa_house'
 import Page from '@/comps/dom/emppage'
 import WhyChooseUS from '@/comps/dom/why_chose_us'
+import Cost_Cal from '@/comps/dom/cost_calc'
+import CEO from '@/comps/dom/ceo'
 
 
 
@@ -59,9 +61,9 @@ export default function Home() {
           <Page />
           <Page />
           <WhyChooseUS />
+          <Cost_Cal />
           <Page />
-          <Page />
-          <Page />
+          <CEO />
         </div>
       </>
       :

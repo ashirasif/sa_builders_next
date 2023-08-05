@@ -12,14 +12,14 @@ const SaIntro = () => {
     return (
         <div className="w-full h-screen overflow-hidden lg:flex lg:flex-row lg:items-center lg:justify-start group">
             <div className={'relative border-l-8 border-primary h-full pl-4 p-8 lg:h-auto lg:transition-all lg:duration-1000' + (showDet?' lg:animate-none animate-back-left lg:basis-full lg:group-hover:translate-x-44': ' lg:animate-none animate-go-left lg:basis-1/2')}>
-                <div className="text-white text-5xl">WE<br />BUILD<br /><h1 className="text-primary">STUFF</h1></div>
+                <div className="text-white text-5xl tracking-widest">WE<br />BUILD<br /><h1 className="text-primary">STUFF</h1></div>
                 <ul className='text-gray-300 mt-4 lg:text-gray-500 lg:text-xl text-lg'>
                     <li><a onClick={() => setShowDet(false)}className="hover:text-white hover:after:content-['_\27F6'] after:text-white transition-all duration-200">Single/Multi Floor Houses</a></li>
                     <li><a onClick={() => setShowDet(false)} className="hover:text-white hover:after:content-['_\27F6'] after:text-white transition-all duration-200">Studio Apartments</a></li>
                     <li><a onClick={() => setShowDet(false)}className="hover:text-white hover:after:content-['_\27F6'] after:text-white transition-all duration-200">Luxury Offices</a></li>
                     <li><a onClick={() => setShowDet(false)}className="hover:text-white hover:after:content-['_\27F6'] after:text-white transition-all duration-200">Shopping Centers</a></li>
                 </ul>
-                <button className='text-lg text-primary bg-transparent border-transparent hover:border-primary hover:border-2 rounded hover:px-3 hover:py-2 mt-8 transition-all'>Check out our past projects</button>
+                <button className='text-lg text-primary bg-transparent border-4 px-3 py-2 border-primary rounded hover:px-3 hover:py-2 mt-8 transition-all lg:border-0 lg:border-transparent lg:hover:border-primary lg:hover:border-2 '>Check out our past projects</button>
             </div>
             <div className={'h-screen relative left-[100vw] -top-[100vh] p-8 transition-all duration-1000 lg:static' + (showDet?' animate-go-right lg:animate-none lg:hidden':' lg:basis-1/2 animate-back-right lg:animate-none lg:block')}>
                 <div className='flex flex-col justify-center items-center h-full'>
