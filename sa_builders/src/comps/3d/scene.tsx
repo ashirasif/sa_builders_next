@@ -3,10 +3,11 @@
 
 import { Suspense, useEffect, useRef, useState } from "react"
 import BgAnime from "./bg_anime_orth"
-import { PerspectiveCamera, OrthographicCamera } from "@react-three/drei"
+import { PerspectiveCamera, OrthographicCamera, useHelper } from "@react-three/drei"
 import { useFrame, useThree } from "@react-three/fiber"
 import Sa3DHouse from "./houses"
-import SimpleHouse from "./simple_h"
+import SimpleHouse from "./simple"
+import { PointLightHelper, RectAreaLight } from "three/src/Three.js"
 
 
 function Perm({handleState} : {handleState: (s: boolean) => void}) {
@@ -39,12 +40,13 @@ const Scene = ({setPerm} : {setPerm: (s: boolean) => void}) => {
 
     // toggle camera
     useEffect(() => {
-      if (prog > 50) {
+      if (prog > 12) {
         setPerscam(true)
       } else {
         setPerscam(false)
       }
     }, [prog])
+
     // window scroll event
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
@@ -54,14 +56,20 @@ const Scene = ({setPerm} : {setPerm: (s: boolean) => void}) => {
         }
     }, [])
 
-
+    // useEffect(() => {
+    //   console.log(prog)
+    // }, [prog])
+    const ref = useRef()
+    
+  
     return (
         
         <Suspense fallback={<Perm handleState={handlePerm} />}>
-          <BgAnime animation={{start: 0, end: 8, prog: prog}} />
-          {/* <Sa3DHouse anime={{start: 51, end: 100, prog: prog}} /> */}
-          
-          {perscam ? <PerspectiveCamera makeDefault position={[0,0,5]} fov={70} near={0.1} far={2000}/> : <OrthographicCamera makeDefault zoom={220} position={[0,0,5]}/>}
+          <BgAnime animation={{start: 0, end: 12, prog: prog}} />
+          <Sa3DHouse anime={{start: 13, end: 100, prog: prog}} />
+          <SimpleHouse />
+          <rectAreaLight color={"#f7aeb3"} width={12} height={12} intensity={199} position={[0,20,15]}/>
+          {perscam ? <PerspectiveCamera makeDefault position={[0,0,5]} fov={100} aspect={window.innerWidth/window.innerHeight} near={0.1} far={2000}/> : <OrthographicCamera makeDefault zoom={220} position={[0,0,5]}/>}
         </Suspense>
         
     )

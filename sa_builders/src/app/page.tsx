@@ -12,13 +12,15 @@ import SaText from '@/comps/dom/front_page/text'
 import SaBottom from '@/comps/dom/front_page/bottom_text'
 import { Suspense, useEffect, useRef, useState } from 'react'
 import SaLoading from '@/comps/3d/loading'
-import { PerspectiveCamera, OrthographicCamera } from '@react-three/drei'
+
 import SaIntro from '@/comps/dom/sa_intro'
 import SaHouse from '@/comps/dom/sa_house'
 import Page from '@/comps/dom/emppage'
 import WhyChooseUS from '@/comps/dom/why_chose_us'
 import Cost_Cal from '@/comps/dom/cost_calc'
 import CEO from '@/comps/dom/ceo'
+import Testimonial from '@/comps/dom/testimonial'
+import Furniture from '@/comps/dom/furniture'
 
 
 
@@ -35,7 +37,7 @@ export default function Home() {
     
     <>
     {perm ? <> 
-        <div className='w-full h-full relative z-10'>  
+        <div className='w-full h-full relative'>  
           <div className='h-[10%] relative z-20'>
             <NavigationBar props={{
               'Projects':'',
@@ -59,10 +61,10 @@ export default function Home() {
           <Page />
           <Page />
           <Page />
-          <Page />
           <WhyChooseUS />
           <Cost_Cal />
-          <Page />
+          <Furniture />
+          <Testimonial />
           <CEO />
         </div>
       </>
@@ -75,8 +77,8 @@ export default function Home() {
           color='black' 
           linear>
           <Scene setPerm={setPerm}/>
-          <OrbitControls />
-          
+          <gridHelper />
+          <OrbitControls/>
         </Canvas>
       </div>
     </>
