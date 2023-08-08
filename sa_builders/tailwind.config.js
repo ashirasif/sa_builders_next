@@ -43,8 +43,8 @@ module.exports = {
           '100%' : {'position':'relative', 'left':'0%'}
         },
         'text-btm': {
-          '0%' : {'postion':'relative', 'bottom': '-10', 'overflow': 'hidden'},
-          '100%': {'position': 'relative', 'bottom': '0%', 'overflow': 'auto'}
+          '0%' : {'postion':'relative', 'bottom': '-20%', 'overflow': 'hidden'},
+          '100%': {'position': 'relative', 'bottom': '10%', 'overflow': 'auto'}
         },
         'go-left': {
           '0%': {'left': '0'},

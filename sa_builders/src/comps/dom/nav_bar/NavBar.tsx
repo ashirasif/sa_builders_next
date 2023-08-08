@@ -8,11 +8,11 @@ const NavigationBar = ({props}: any) => {
   const [dd, setDd] = useState(false);  
 
   return (
-    <nav className="bg-transparent p-4 ps-6 relative -top-[100px] animate-navbar">
+    <nav className="bg-transparent p-4 relative -top-[100px] animate-navbar">
       <div className="mx-auto">
         <div className="flex items-center justify-between">
-          <div className="md:left-0 md:w-24 w-1/6 relative left-[40%]">
-            <a href="#" className=""><img src="/logo.png" alt="logo" className="aspect-auto"/></a>  
+            <div className="md:left-0 md:w-24 w-1/6 relative left-[40%]">
+              <a href="#" className=""><img src="/logo.png" alt="logo" className="aspect-auto"/></a>  
           </div>
           <div className="space-x-6 hidden md:block"> 
             {
@@ -28,7 +28,7 @@ const NavigationBar = ({props}: any) => {
             }
           </div>
           {/* DropDown Starts here */}
-          <div className="md:hidden">
+          <div className="md:hidden md:w-24 w-1/6">
             <div className="text-primary font-extrabold border-s-[3px] border-b-[3px] border-primary px-5 py-1 text-xl hover:text-2xl hover:bg-primary hover:text-black transition-all duration-200">
               <button onClick={() => setDd(!dd)}>&lt;-</button>
             </div>
@@ -49,7 +49,6 @@ const NavigationBar = ({props}: any) => {
               } 
             </div>
           </div>
-          
         </div>
       </div>
     </nav>
