@@ -38,11 +38,11 @@ const Cost_Cal = () => {
                     <p className="text-primary text-2xl tracking-widest inline">?: </p>
                     {width < 1024 ?
                     <>
-                    <p className="text-white text-base inline font-light opacity-70 lg:text-lg">Get an instant quotation from the comfort of your living room sofa. Provide a brief explanation, and we'll promptly provide a rough estimate for your dream house. Afterwards, ring us to get started.</p>
+                    <p className="text-white text-base inline font-light opacity-70 lg:text-xl">Get an instant quotation from the comfort of your living room sofa. Provide a brief explanation, and we'll promptly provide a rough estimate for your dream house. Afterwards, ring us to get started.</p>
                     </>
                     :
                     <>
-                    <p className="text-white text-base inline font-light opacity-70 lg:text-lg">Obtain a prompt and accurate quotation from the comfort of your living room sofa. A concise elucidation is all it takes, and you shall promptly receive a rough estimate for the realization of your envisioned residence. Subsequently, kindly contact our team, and we shall commence the necessary actions without delay.</p>
+                    <p className="text-white text-base inline font-light opacity-70 lg:text-xl">Obtain a prompt and accurate quotation from the comfort of your living room sofa. A concise elucidation is all it takes, and you shall promptly receive a rough estimate for the realization of your envisioned residence. Subsequently, kindly contact our team, and we shall commence the necessary actions without delay.</p>
                     </>}
                 </div>
                 <div className="text-left" >

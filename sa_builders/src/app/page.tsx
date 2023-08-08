@@ -21,6 +21,10 @@ import Cost_Cal from '@/comps/dom/cost_calc'
 import CEO from '@/comps/dom/ceo'
 import Testimonial from '@/comps/dom/testimonial'
 import Furniture from '@/comps/dom/furniture'
+import SimpleHouse from '@/comps/dom/simple_house'
+import FancyHouse from '@/comps/dom/fancy_house'
+import Pool from '@/comps/dom/pool'
+import Neon from '@/comps/dom/noen_room'
 
 
 
@@ -37,7 +41,7 @@ export default function Home() {
     
     <>
     {perm ? <> 
-        <div className='w-full h-full relative'>  
+        <div className='w-full h-full relative z-10'>  
           <div className='h-[10%] relative z-20'>
             <NavigationBar props={{
               'Projects':'',
@@ -56,11 +60,10 @@ export default function Home() {
           </div> 
           <SaIntro />
           <SaHouse />
-          <Page />
-          <Page />
-          <Page />
-          <Page />
-          <Page />
+          <SimpleHouse />
+          <FancyHouse />
+          <Pool />
+          <Neon />
           <WhyChooseUS />
           <Cost_Cal />
           <Furniture />
@@ -77,8 +80,7 @@ export default function Home() {
           color='black' 
           linear>
           <Scene setPerm={setPerm}/>
-          <gridHelper />
-          <OrbitControls/>
+          
         </Canvas>
       </div>
     </>

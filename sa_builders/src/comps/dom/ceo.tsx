@@ -20,7 +20,9 @@ const CEO = () => {
                     <div className="text-lg xl:text-xl text-left justify-self-start self-start" ref={ref}>Muhammad Nazim <br />CEO</div>
                 </div>
             </div>
-            
+            <div className="bg-black h-[30%]">
+
+            </div>
         </div>
     )
 }

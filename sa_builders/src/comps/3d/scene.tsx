@@ -40,7 +40,7 @@ const Scene = ({setPerm} : {setPerm: (s: boolean) => void}) => {
 
     // toggle camera
     useEffect(() => {
-      if (prog > 12) {
+      if (prog > 100) {
         setPerscam(true)
       } else {
         setPerscam(false)
@@ -65,10 +65,8 @@ const Scene = ({setPerm} : {setPerm: (s: boolean) => void}) => {
     return (
         
         <Suspense fallback={<Perm handleState={handlePerm} />}>
-          <BgAnime animation={{start: 0, end: 12, prog: prog}} />
-          <Sa3DHouse anime={{start: 13, end: 100, prog: prog}} />
-          <SimpleHouse />
-          <rectAreaLight color={"#f7aeb3"} width={12} height={12} intensity={199} position={[0,20,15]}/>
+          <BgAnime animation={{start: 0, end: 55, prog: prog}} />
+          
           {perscam ? <PerspectiveCamera makeDefault position={[0,0,5]} fov={100} aspect={window.innerWidth/window.innerHeight} near={0.1} far={2000}/> : <OrthographicCamera makeDefault zoom={220} position={[0,0,5]}/>}
         </Suspense>
         
