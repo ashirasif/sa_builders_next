@@ -14,9 +14,6 @@ const SaHouse = () => {
         
     })
 
-
-
-
     return(
         <div className="h-screen text-white group overflow-hidden py-8">
             <div className={"grid grid-row justify-center text-center h-full transition-all duration-500 font-black" + (inView? ' items-center': ' text-white items-start')}>
