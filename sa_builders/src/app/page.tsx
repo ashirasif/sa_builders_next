@@ -1,8 +1,6 @@
 'use client'
 
 
-
-
 // comps import
 import NavigationBar from '@/comps/dom/nav_bar/NavBar'
 import { Canvas } from '@react-three/fiber'
