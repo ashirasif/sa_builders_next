@@ -1,5 +1,6 @@
 
 import { useInView } from "@react-spring/web"
+import Image from "next/image"
 import { useState } from "react"
 
 
@@ -16,7 +17,7 @@ const Neon = () => {
                     <div className="text-white transition-all duration-500">To <div className={"transition-all duration-500" + (inView || show ? " text-primary": "" )}>Neon Rooms</div></div>
                 </div>
                 <div className="flex flex-row justify-center">
-                    <img src="/neon.png" alt="" className="md:w-[120vh]"/>
+                    <Image height={1000} width={1000} src="/neon.png" alt="" className="md:w-[120vh]"/>
                 </div>
             </div>
         </div>
