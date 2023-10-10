@@ -7,7 +7,7 @@ const WhyChooseUS = () => {
 
     const [showDet, setshowDet] = useState(0)
 
-    function handleClick(n) {
+    function handleClick(n:any) {
         if (showDet == n) {
             setshowDet(0)
         } else {

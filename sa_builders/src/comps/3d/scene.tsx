@@ -3,11 +3,8 @@
 
 import { Suspense, useEffect, useRef, useState } from "react"
 import BgAnime from "./bg_anime_orth"
-import { PerspectiveCamera, OrthographicCamera, useHelper } from "@react-three/drei"
-import { useFrame, useThree } from "@react-three/fiber"
-import Sa3DHouse from "./houses"
-import SimpleHouse from "./simple"
-import { PointLightHelper, RectAreaLight } from "three/src/Three.js"
+import { PerspectiveCamera, OrthographicCamera } from "@react-three/drei"
+import { useThree } from "@react-three/fiber"
 
 
 function Perm({handleState} : {handleState: (s: boolean) => void}) {
